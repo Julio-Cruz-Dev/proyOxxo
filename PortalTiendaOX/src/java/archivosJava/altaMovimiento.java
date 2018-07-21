@@ -46,7 +46,8 @@ public class altaMovimiento extends HttpServlet {
             out.println("<head>");
             out.println("<div width='98%' align='center'>");
             out.println("<a href='tipoMovimiento.jsp'  align='center' title='Ir la página anterior'>REGRESAR..</a>");
-            out.println("</div>");           
+            out.println("</div>");
+            out.println("");
             out.println("</head>");
             out.println("<body>");
             conexionPool mp = new conexionPool();                    
