@@ -5,6 +5,7 @@
  */
 package negocio;
 
+import Entidades.Cliente;
 import Entidades.ProveedoresTelefonia;
 import Entidades.TiposMovimiento;
 import Objetos.Respuesta;
@@ -54,10 +55,9 @@ public class TelefoniaController {
         RespuestaSaldo respSaldo = new RespuestaSaldo();
         try {
             if (model != null) {
-                double saldo =conexion.getSaldo(model);
-                if(saldo >= 1){
-                    respSaldo.setSaldo(saldo);
-                    respSaldo.setRespuesta(new Respuesta(true, "Tu saldo es de "+saldo));
+                respSaldo =conexion.getSaldo(model);
+                if(respSaldo.getSaldo() >= 1){                   
+                    respSaldo.setRespuesta(new Respuesta(true, "Tu saldo es de "+respSaldo.getSaldo()));
                 }else{
                     respSaldo.setRespuesta(new Respuesta(true, "Tu saldo está vencido"));
                 }
@@ -99,6 +99,27 @@ public class TelefoniaController {
             respuesta.setRespuesta(new Respuesta(false, ex.getMessage())); 
         }
         
+        return respuesta;
+    }
+     
+     public Respuesta InsertaCliente(Cliente cliente) {
+        Respuesta respuesta = new Respuesta();
+        try {
+            if (cliente != null) {
+                int resp = conexion.InsertaCliente(cliente);
+                if (resp == 1) {
+                    respuesta.setSuccess(true);
+                    respuesta.setMessage("Se ha insertado el cliente con éxito");
+                } else {
+                    respuesta.setSuccess(false);
+                    respuesta.setMessage("No se pudo registrar el cliente");
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+            respuesta.setSuccess(false);
+            respuesta.setMessage(ex.getMessage());
+        }
         return respuesta;
     }
      

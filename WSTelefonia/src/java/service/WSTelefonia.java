@@ -5,6 +5,7 @@
  */
 package service;
 
+import Entidades.Cliente;
 import Entidades.ProveedoresTelefonia;
 import Entidades.TiposMovimiento;
 import Objetos.Respuesta;
@@ -66,7 +67,7 @@ public class WSTelefonia {
             return controller.getSaldo(modelo);
         } catch (Exception ex) {
             System.out.println("Error en el web service: " + ex.getMessage());
-            return  new RespuestaSaldo(0,  new Respuesta(false, "Error en el web service: " + ex.getMessage()));
+            return  new RespuestaSaldo(new Respuesta(false, "Error en el web service: " + ex.getMessage()));
         } finally {
             controller = null;
         }
@@ -126,7 +127,7 @@ public class WSTelefonia {
         TelefoniaController controller = new TelefoniaController();
         try {
 
-            UsoTelefonoModel modelo = new UsoTelefonoModel(idTipoMovimiento, idTelefonia, tiempo, noCel);
+            UsoTelefonoModel modelo = new UsoTelefonoModel(idTelefonia, idTipoMovimiento, tiempo, noCel);
             return controller.UsoTelefono(modelo);
         } catch (Exception ex) {
             System.out.println("Error en el web service: " + ex.getMessage());
@@ -135,6 +136,25 @@ public class WSTelefonia {
             controller = null;
         }
 
+    }
+    
+    /**
+     * Método para hacer registrar un cliente.
+     *
+     * @param cliente  
+     * @return Respuesta
+     */
+    @WebMethod(operationName = "InsertaCliente")
+    public synchronized Respuesta InsertaCliente(@WebParam(name = "cliente") Cliente cliente) {
+        TelefoniaController controller = new TelefoniaController();
+        try {
+            return controller.InsertaCliente(cliente);
+        } catch (Exception ex) {
+            System.out.println("Error en el web service: " + ex.getMessage());
+            return new Respuesta(false, "Error en el web service: " + ex.getMessage());
+        } finally {
+            controller = null;
+        }
     }
     
     /**
