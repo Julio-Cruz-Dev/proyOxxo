@@ -66,7 +66,7 @@ public class WSTelefonia {
             return controller.getSaldo(modelo);
         } catch (Exception ex) {
             System.out.println("Error en el web service: " + ex.getMessage());
-            return  new RespuestaSaldo(0,  new Respuesta(false, "Error en el web service: " + ex.getMessage()));
+            return  new RespuestaSaldo(new Respuesta(false, "Error en el web service: " + ex.getMessage()));
         } finally {
             controller = null;
         }

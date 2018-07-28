@@ -54,9 +54,8 @@ public class TelefoniaController {
         RespuestaSaldo respSaldo = new RespuestaSaldo();
         try {
             if (model != null) {
-                double saldo =conexion.getSaldo(model);
-                if(saldo >= 1){
-                    respSaldo.setSaldo(saldo);
+                RespuestaSaldo saldo =conexion.getSaldo(model);
+                if(saldo.getSaldo() >= 1){                   
                     respSaldo.setRespuesta(new Respuesta(true, "Tu saldo es de "+saldo));
                 }else{
                     respSaldo.setRespuesta(new Respuesta(true, "Tu saldo está vencido"));

@@ -8,6 +8,7 @@ package datos;
 import Entidades.ProveedoresTelefonia;
 import Entidades.TiposMovimiento;
 import Objetos.RespuestaGetProveedoresTelefonia;
+import Objetos.RespuestaSaldo;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -90,20 +91,34 @@ public class Conexion {
         }
     }
 
-    public double getSaldo(SaldoModel model) throws Exception {
-        String strSql = "select top 1 t.saldo as saldo from tbl_persona as p inner join tbl_telefonia  as t on p.id = t.id_persona  where telefono = '" + model.getNoCelular() + "'";
+    public RespuestaSaldo getSaldo(SaldoModel model) throws Exception {
+        //String strSql = "select top 1 t.saldo as saldo from tbl_persona as p inner join tbl_telefonia  as t on p.id = t.id_persona  where telefono = '" + model.getNoCelular() + "'";
+        RespuestaSaldo resp = new RespuestaSaldo();
+        String strSql = " SELECT P.nombre, P.a_paterno, P.a_materno, P.telefono, PT.nombre telefonia, T.saldo"+
+                " FROM dbo.tbl_persona P"+
+                " INNER JOIN  dbo.tbl_telefonia T"+
+                " ON T.id_persona=P.Id"+
+                " LEFT JOIN dbo.clt_proveedor_telefonia PT"+
+                " ON PT.id=T.id_proveedor"+
+                " WHERE P.telefono= '"+model.getNoCelular()+"'";
+
+
         Statement stm;
         ResultSet rs;
-        double fltSaldo = 0;
+        
         try {
             stm = con.createStatement();
 
             //ejecuto la consulta
             rs = stm.executeQuery(strSql);
-
+            
             while (rs.next()) {
-                System.out.println(rs.getDouble("saldo"));
-                fltSaldo = rs.getDouble("saldo");
+                resp.setSaldo(rs.getDouble("saldo"));
+                resp.setNombre(rs.getString("nombre"));
+                resp.setApepaterno(rs.getString("a_paterno"));
+                resp.setApematerno(rs.getString("a_materno"));
+                resp.setTelefono(rs.getString("telefono"));
+                resp.setTelefonia(rs.getString("telefonia"));
             }
             //cierro el  ResultSet
             rs.close();
@@ -113,7 +128,7 @@ public class Conexion {
             //con.rollback();
             throw ex;
         }
-        return fltSaldo;
+        return resp;
     }
     
     
