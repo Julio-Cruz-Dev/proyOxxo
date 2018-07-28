@@ -29,10 +29,10 @@ public class Conexion {
 
     private static volatile Conexion conexion;
     String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    String connectionUrl = "jdbc:sqlserver://DESKTOP-QEP04AU\\SQLEXPRESS:1433;"
-                    + "databaseName=oxxo;";
+    //String connectionUrl = "jdbc:sqlserver://10.11.44.108\\SQLEXPRESS:1433;"
+                    //+ "databaseName=oxxo;";
             
-    //String connectionUrl = "jdbc:sqlserver://10.11.44.108\\SQLEXPRESS:1433;databaseName=oxxo;";
+    String connectionUrl = "jdbc:sqlserver://10.11.44.108\\SQLEXPRESS:1433;databaseName=oxxo;";
     Connection con = null;
 
 //    public static Conexion getInstance(){
@@ -55,7 +55,7 @@ public class Conexion {
     public Conexion() {
         try {
             Class.forName(driver);
-            con = DriverManager.getConnection(connectionUrl, "sa", "Mario690");
+            con = DriverManager.getConnection(connectionUrl, "sa", "randrade");
             try {
                 //System.out.println(ponerSaldo(new SaldoModel("4771112781", 1, 199)));
                 //System.out.println(getSaldo(new SaldoModel("4771112781")));
