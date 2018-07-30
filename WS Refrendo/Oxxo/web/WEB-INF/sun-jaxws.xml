@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints version="2.0" xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime">
+  <endpoint implementation="refrendo.WS_Alta_Refrendo" name="WS_Alta_Refrendo" url-pattern="/WS_Alta_Refrendo"/>
+  <endpoint implementation="refrendo.WS_Abono_Refrendo" name="WS_Abono_Refrendo" url-pattern="/WS_Abono_Refrendo"/>
+  <endpoint implementation="refrendo.WS_Pago_Refrendo" name="WS_Pago_Refrendo" url-pattern="/WS_Pago_Refrendo"/>
+</endpoints>
