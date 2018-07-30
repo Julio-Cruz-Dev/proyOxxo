@@ -3,12 +3,19 @@
     Created on : 20/07/2018, 10:32:29 PM
     Author     : julio
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="archivosJava.clsProveedor"%>
+ <%
+            clsProveedor objpv = new clsProveedor();
+%>
+
 <!DOCTYPE html>
-<html>
+<html>      
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
         <style>
             .linea 
             {	            
@@ -75,7 +82,18 @@
               margin-left: .5em;
             }
         </style>
-    </head>
+        <script>
+            function ShowSelected()
+            {
+            /* Para obtener el valor */
+            var cod = document.getElementById("opciones").value;
+            document.getElementById("hide").value = cod;}
+            function valordos(){                
+                 var cod = document.getElementById("tipo").value;
+                document.getElementById("hide2").value = cod; //alert(cod); 
+            }            
+        </script>
+        </head>
     <body>
         <table  width="98%">
             <tr align="center">
@@ -83,6 +101,8 @@
             </tr>
         </table>        
         <form   action="/my-handling-form-page" method="post">            
+            <input id="hide" name="hide" style="width:0px;height:0px">
+            <input id="hide2" name="hide" style="width:0px;height:0px">
           <table>
             <tr>               
                 <td>
@@ -103,7 +123,39 @@
                     <label for="mail">Teléfono</label> 
                     <input  id="telefono" name="telefono">
                 </td>
-            </tr>          
+            </tr>   
+            <tr>
+               <%-- <td>
+                  <label for="mail">TIPO</label>   
+                  <select name="tipo" id="tipo" onchange="valordos();" >
+                    <option value="0">SELECCIONE</option>  
+                    <option value="1">TELEFONIA</option>
+                    <option value="2">REFRENDO</option>                                        
+                  </select> 
+                </td>--%>    
+                <td>
+                 <label for="proveedor">Proveedor</label>   
+                 <select name="opciones" id="opciones" onchange="ShowSelected();" >
+                  <option value="0">SELECCIONE</option>
+                  <%
+                                String datos[][] = new String[40][40];
+                                datos= objpv.Listar();                                
+                                 for (int i= 0;i<datos.length;i++) {  
+                                  
+                    %>
+                   <option value="<%=datos[0][i]%>"><%=datos[1][i]%></option>                                                                                
+                   <%
+                                }
+                    %>
+                    </select>                      
+                </td>    
+            </tr>
+            <%-- <tr>
+                <td>
+                    <label for="Placas">Placas</label> 
+                    <input  id="placas" name="placas">
+                </td>
+            </tr>--%>
           </table>  
          <hr class="linea"/>
          <table  width="98%"  >
@@ -111,8 +163,8 @@
                 <td>
                     <input type="submit" name="Guardar" value="Guardar"  
                            onclick= this.form.action="altaPersona">
-                    <input type="submit" name="Buscar" value ="Buscar" 
-                         onclick= this.form.action="consultaPersona">
+                    <%--<input type="submit" name="Buscar" value ="Buscar" 
+                         onclick= this.form.action="consultaPersona">--%>
                 </td>
             </tr>
         </table>

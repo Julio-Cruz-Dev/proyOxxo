@@ -7,9 +7,7 @@ package archivosJava;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -17,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import service.Respuesta;
 
 
 /**
@@ -50,24 +49,37 @@ public class altaMovimiento extends HttpServlet {
             out.println("");
             out.println("</head>");
             out.println("<body>");
-            conexionPool mp = new conexionPool();                    
-            Connection con = mp.ds.getConnection();
             
-            try {
-                Statement stm = con.createStatement();  
+            service.TiposMovimiento tmv = new service.TiposMovimiento();
                 
-                String consulta;
-                
-                consulta=" insert into clt_tipo_movimiento (tipo,descripcion,costo) values('" + request.getParameter("tipo")+ "','";                
-                consulta= consulta + request.getParameter("descripcion") + "','";
-                consulta= consulta + request.getParameter("costo")+ "')";                
-                stm.executeUpdate(consulta);                
-                out.print("<p>registros guardados</p>");
-            }
-            
-            catch(SQLException ex ){
-             out.print("<p>El error es: " +  ex.getMessage()  + "</p>");
-            }
+            tmv.setTipo(request.getParameter("tipo"));
+            tmv.setDescripcion(request.getParameter("descripcion"));               
+            tmv.setCosto(Float.parseFloat(request.getParameter("costo")));
+////            conexionPool mp = new conexionPool();                    
+////            Connection con = mp.ds.getConnection();
+////            
+////            try {
+////                Statement stm = con.createStatement();  
+////                
+////                String consulta;
+////                
+////                consulta=" insert into clt_tipo_movimiento (tipo,descripcion,costo) values('" + request.getParameter("tipo")+ "','";                
+////                consulta= consulta + request.getParameter("descripcion") + "','";
+////                consulta= consulta + request.getParameter("costo")+ "')";                
+////                stm.executeUpdate(consulta);                
+////                out.print("<p>registros guardados</p>");
+////            }
+////            
+////            catch(SQLException ex ){
+////             out.print("<p>El error es: " +  ex.getMessage()  + "</p>");
+////            }
+                Respuesta  res = insertaTipoMovimiento(tmv);
+                if (res.isSuccess()==true){
+                    out.print("<p>registros guardados</p>");
+                }else
+                {
+                    out.print("<p>"+ res.getMessage() +"</p>");
+                }
             out.println("</body>");
             out.println("</html>");
         }
@@ -119,5 +131,13 @@ public class altaMovimiento extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static Respuesta insertaTipoMovimiento(service.TiposMovimiento tiposMovimiento) {
+        service.WSTelefonia_Service service = new service.WSTelefonia_Service();
+        service.WSTelefonia port = service.getWSTelefoniaPort();
+        return port.insertaTipoMovimiento(tiposMovimiento);
+    }
+
+  
 
 }

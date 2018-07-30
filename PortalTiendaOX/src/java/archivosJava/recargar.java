@@ -1,0 +1,114 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package archivosJava;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import service.Respuesta;
+
+
+/**
+ *
+ * @author julio
+ */
+@WebServlet(name = "recargar", urlPatterns = {"/recargar"})
+public class recargar extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try  {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet recargar</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            
+                            
+            java.lang.String Cel = (request.getParameter("telefono"));
+            float moto = (Float.parseFloat(request.getParameter("monto")));
+            int id =(Integer.parseInt(request.getParameter("hide")));               
+               
+                Respuesta  res = recarga(Cel,id,moto);
+                if (res.isSuccess()==true){
+                    out.print("<p>registros guardados</p>");
+                }else
+                {
+                    out.print("<p>"+ res.getMessage() +"</p>");
+                }
+            
+            out.println("</body>");
+            out.println("</html>");
+        }catch(NumberFormatException e)
+        {
+            out.print("<p>"+ e.getMessage()  +"</p>");
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+    private static Respuesta recarga(java.lang.String noCel, int idTelefonia, float monto) {
+        service.WSTelefonia_Service service = new service.WSTelefonia_Service();
+        service.WSTelefonia port = service.getWSTelefoniaPort();
+        return port.recarga(noCel, idTelefonia, monto);
+    }
+
+   
+}

@@ -7,9 +7,7 @@ package archivosJava;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -17,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import service.Respuesta;
 /**
  *
  * @author julio
@@ -48,22 +47,40 @@ public class altaPersona extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             
-         conexionPool mp = new conexionPool();                    
-            Connection con = mp.ds.getConnection();
-            
-            try {
-                Statement stm = con.createStatement();  
+////         conexionPool mp = new conexionPool();                    
+////         Connection con = mp.ds.getConnection();
+                service.Cliente cleinte = new service.Cliente();
                 
-                String consulta;
+                cleinte.setNombre(request.getParameter("nombre"));
+                cleinte.setApematerno(request.getParameter("amaterno")); 
+                cleinte.setApepaterno(request.getParameter("apaterno"));
+                cleinte.setIdproveedor(Integer.parseInt(request.getParameter("hide")));
+                cleinte.setTelefono(request.getParameter("telefono"));
                 
-                consulta=" execute sp_alta_cliente '" + request.getParameter("nombre") + "','" + request.getParameter("apaterno") + "','" + request.getParameter("amaterno") + "','" + request.getParameter("telefono") +"',''";
-                stm.executeUpdate(consulta);                
-                out.print("<p>registros guardados</p>");
-            }
+                Respuesta  res = insertaCliente(cleinte);
             
-            catch(SQLException ex ){
-             out.print("<p>El error es: " +  ex.getMessage()  + "</p>");
-            }
+//            try {
+//                Statement stm = con.createStatement();  
+//                
+//                String consulta;
+//                if (request.getParameter("hide2")=="1" ){
+//                    consulta=" execute sp_alta_cliente '" + request.getParameter("nombre") + "','" + request.getParameter("apaterno") + "','" + request.getParameter("amaterno") + "','" + request.getParameter("telefono") +"'," + request.getParameter("hide")+"," + "0";
+//                }else{
+//                    consulta=" execute SP_Alta_Refrendo '" + request.getParameter("nombre") + "','" + request.getParameter("apaterno") + "','" + request.getParameter("amaterno") + "','" + request.getParameter("telefono") +"'," + request.getParameter("placas")+"," + "0";
+//                }
+//                stm.executeUpdate(consulta);                
+//                out.print("<p>registros guardados</p>");
+//            }
+//            
+//            catch(SQLException ex ){
+//             out.print("<p>El error es: " +  ex.getMessage()  + "</p>");
+//            }                
+                if (res.isSuccess()==true){
+                    out.print("<p>registros guardados</p>");
+                }else
+                {
+                    out.print("<p>"+ res.getMessage() +"</p>");
+                }
             out.println("</body>");
             out.println("</html>");
         }
@@ -115,5 +132,11 @@ public class altaPersona extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static Respuesta insertaCliente(service.Cliente cliente) {
+        service.WSTelefonia_Service service = new service.WSTelefonia_Service();
+        service.WSTelefonia port = service.getWSTelefoniaPort();
+        return port.insertaCliente(cliente);
+    }
 
 }

@@ -36,8 +36,10 @@
       <a href="ctlProveedores.jsp" TARGET=principal>PROVEEDORE TELEFONIA</a>
       <a href="tipoMovimiento.jsp" TARGET=principal>TIPO MOVIMIENTO</a>
       <a href="ctlPersona.jsp" TARGET=principal>PERSONA</a>
+      <a href="recarga.jsp" TARGET=principal>RECARGA</a>
       <a href="#">....</a>
       <a href="#">....</a>
+      
     </div>
 </body>
 </html>

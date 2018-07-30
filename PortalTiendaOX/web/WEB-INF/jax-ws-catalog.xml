@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://10.11.44.108:8090/WSTelefonia/WSTelefonia?wsdl" uri="wsdl/10.11.44.108_8090/WSTelefonia/WSTelefonia.wsdl"/>
+    <system systemId="http://10.11.44.108:8090/WSTelefonia/WSTelefonia?xsd=1" uri="wsdl/10.11.44.108_8090/WSTelefonia/WSTelefonia.xsd_1.xsd"/>
+    <system systemId="http://127.0.0.1:8090/WSTelefonia/WSTelefonia?wsdl" uri="wsdl/127.0.0.1_8090/WSTelefonia/WSTelefonia.wsdl"/>
+    <system systemId="http://127.0.0.1:8090/WSTelefonia/WSTelefonia?xsd=1" uri="wsdl/127.0.0.1_8090/WSTelefonia/WSTelefonia.xsd_1.xsd"/>
+</catalog>

@@ -7,9 +7,7 @@ package archivosJava;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -17,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import service.Respuesta;
 
 /**
  *
@@ -50,26 +49,40 @@ public class altaCatProveedores extends HttpServlet {
             out.println("</div>");          
             out.println("</head>");
             out.println("<body>");
-//                        
-            conexionPool mp = new conexionPool();                    
-            Connection con = mp.ds.getConnection();
-            
-            
-                Statement stm = con.createStatement();  
+//////                        
+////            conexionPool mp = new conexionPool();                    
+////            Connection con = mp.ds.getConnection();
+////            
+////            
+////                Statement stm = con.createStatement();  
+////                
+////                String consulta;
+////                
+                service.ProveedoresTelefonia proveedor = new service.ProveedoresTelefonia();
                 
-                String consulta;
+                proveedor.setNombre(request.getParameter("nombre"));
+                proveedor.setImpuestos(Float.parseFloat(request.getParameter("impuesto")));               
+                proveedor.setDescripcion(request.getParameter("descripcion"));
                 
-                consulta=" insert into clt_proveedor_telefonia (nombre,descripcion,impuestos) values('" + request.getParameter("nombre") + "','";                
-                consulta= consulta + request.getParameter("descripcion") + "',";
-                consulta= consulta + request.getParameter("impuesto")+ ")";                
-                stm.executeUpdate(consulta);                
-                out.print("<p>registros guardados</p>");
+//                consulta=" insert into clt_proveedor_telefonia (nombre,descripcion,impuestos) values('" + request.getParameter("nombre") + "','";                
+//                consulta= consulta + request.getParameter("descripcion") + "',";
+//                consulta= consulta + request.getParameter("impuesto")+ ")";                
+//                stm.executeUpdate(consulta);        
+                Respuesta  res = insertaProveedor(proveedor);
+                if (res.isSuccess()==true){
+                    out.print("<p>registros guardados</p>");
+                }else
+                {
+                    out.print("<p>"+ res.getMessage() +"</p>");
+                }
+                
           
             out.println("</body>");
             out.println("</html>");
-        }catch(SQLException ex){
+        }catch(NumberFormatException ex){
                 out.println("<p>"+ ex.getMessage()+"</p>");
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -118,5 +131,13 @@ public class altaCatProveedores extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static Respuesta insertaProveedor(service.ProveedoresTelefonia proveedor) {
+        service.WSTelefonia_Service service = new service.WSTelefonia_Service();
+        service.WSTelefonia port = service.getWSTelefoniaPort();
+        return port.insertaProveedor(proveedor);
+    }
+
+
 
 }

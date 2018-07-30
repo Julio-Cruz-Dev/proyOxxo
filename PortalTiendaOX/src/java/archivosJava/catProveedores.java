@@ -7,10 +7,8 @@ package archivosJava;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -18,6 +16,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import service.ProveedoresTelefonia;
+import service.RespuestaGetProveedoresTelefonia;
 
 /**
  *
@@ -58,13 +58,13 @@ public class catProveedores extends HttpServlet {
             out.println("</script>");                        
             out.println("</head>"); 
             out.println("<body width: auto>");
-            conexionPool mp = new conexionPool();                  
-            Connection con = mp.ds.getConnection();
+////        conexionPool mp = new conexionPool();                  
+////        Connection con = mp.ds.getConnection();
             
             try {
-                Statement stm = con.createStatement();
+                //Statement stm = con.createStatement();
                 
-                ResultSet rs = stm.executeQuery("select * from clt_proveedor_telefonia");
+                //ResultSet rs = stm.executeQuery("select * from clt_proveedor_telefonia");
                 
                 out.println("<Table id='grid-basic' class='table table-condensed table-hover table-striped'>");    
                                 
@@ -80,22 +80,32 @@ public class catProveedores extends HttpServlet {
                 out.println("</thead>");
                 out.println("<tbody>");
                 
-                while (rs.next() ){                    
+                RespuestaGetProveedoresTelefonia result= getProveedoresTelefonia(); 
+                
+                if (result.getRespuesta().isSuccess()==true){
+                  List datos= result.getProveedores();
+                  ProveedoresTelefonia prov = new ProveedoresTelefonia();
+                for (int i= 0;i<datos.size();i++) {  
+                    prov = (ProveedoresTelefonia)  datos.get(i);
                     
                     out.println("<tr>");
-                    out.println("<td>"+ rs.getString("nombre") );
+                    out.println("<td>"+ prov.getNombre() );
                     out.println("</td>");
-                    out.println("<td>" + rs.getString("descripcion")) ;
+                    out.println("<td>" + prov.getDescripcion() ) ;
                     out.println("</td>");
-                    out.println("<td>" + rs.getString("impuestos"));
+                    out.println("<td>" + prov.getImpuestos());
                     out.println("</td>");
-                    out.println("</tr>");                    
-                                                  
+                    out.println("</tr>");                                                                      
+                    }
+                }
+                else
+                {
+                    out.print("<p>El error es: " +  result.getRespuesta().getMessage()  + "</p>");
                 }
                 out.println("</tbody>");
                 out.println("</Table>");
             }
-            catch(SQLException ex ){
+            catch(Exception ex ){
              out.print("<p>El error es: " +  ex.getMessage()  + "</p>");
             }
             out.println("</body>");
@@ -153,5 +163,13 @@ public class catProveedores extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static RespuestaGetProveedoresTelefonia getProveedoresTelefonia() {
+        service.WSTelefonia_Service service = new service.WSTelefonia_Service();
+        service.WSTelefonia port = service.getWSTelefoniaPort();
+        return port.getProveedoresTelefonia();
+    }
+
+  
 
 }

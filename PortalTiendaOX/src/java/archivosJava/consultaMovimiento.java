@@ -7,10 +7,8 @@ package archivosJava;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -18,6 +16,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import service.RespuestaTiposMovimiento;
+import service.TiposMovimiento;
+
 
 /**
  *
@@ -58,13 +59,13 @@ public class consultaMovimiento extends HttpServlet {
             out.println("</script>");                        
             out.println("</head>"); 
             out.println("<body width: auto>");
-            conexionPool mp = new conexionPool();                  
-            Connection con = mp.ds.getConnection();
+////            conexionPool mp = new conexionPool();                  
+////            Connection con = mp.ds.getConnection();
             
             try {
-                Statement stm = con.createStatement();
-                
-                ResultSet rs = stm.executeQuery("select * from clt_tipo_movimiento");
+////                Statement stm = con.createStatement();
+////                
+////                ResultSet rs = stm.executeQuery("select * from clt_tipo_movimiento");
                 
                 out.println("<Table id='grid-basic' class='table table-condensed table-hover table-striped'>");    
                                 
@@ -80,22 +81,41 @@ public class consultaMovimiento extends HttpServlet {
                 out.println("</thead>");
                 out.println("<tbody>");
                 
-                while (rs.next() ){                    
-                    
+                RespuestaTiposMovimiento result= getTiposMovimiento(); 
+                
+                if (result.getRespuesta().isSuccess()==true){
+                  List datos= result.getTiposMovimiento();
+                    TiposMovimiento tmv = new TiposMovimiento();
+                for (int i= 0;i<datos.size();i++) {  
+                    tmv = (TiposMovimiento)  datos.get(i);
                     out.println("<tr>");
-                    out.println("<td>"+ rs.getString("tipo") );
+                    out.println("<td>"+ tmv.getTipo());
                     out.println("</td>");
-                    out.println("<td>" + rs.getString("descripcion")) ;
+                    out.println("<td>" + tmv.getDescripcion()) ;
                     out.println("</td>");
-                    out.println("<td>" + rs.getString("costo"));
+                    out.println("<td>" + tmv.getCosto());
                     out.println("</td>");
-                    out.println("</tr>");                    
-                                                  
+                    out.println("</tr>");    
+////                while (rs.next() ){                    
+////                    
+////                    out.println("<tr>");
+////                    out.println("<td>"+ rs.getString("tipo") );
+////                    out.println("</td>");
+////                    out.println("<td>" + rs.getString("descripcion")) ;
+////                    out.println("</td>");
+////                    out.println("<td>" + rs.getString("costo"));
+////                    out.println("</td>");
+////                    out.println("</tr>");                    /                                                  
+////                }
                 }
                 out.println("</tbody>");
                 out.println("</Table>");
+                } else
+                {
+                    out.print("<p>El error es: " +  result.getRespuesta().getMessage()  + "</p>");
+                }
             }
-            catch(SQLException ex ){
+            catch(Exception ex ){
              out.print("<p>El error es: " +  ex.getMessage()  + "</p>");
             }
             out.println("</body>");
@@ -149,5 +169,13 @@ public class consultaMovimiento extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static RespuestaTiposMovimiento getTiposMovimiento() {
+        service.WSTelefonia_Service service = new service.WSTelefonia_Service();
+        service.WSTelefonia port = service.getWSTelefoniaPort();
+        return port.getTiposMovimiento();
+    }
+
+   
 
 }
