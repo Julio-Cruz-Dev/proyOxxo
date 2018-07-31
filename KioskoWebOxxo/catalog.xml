@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://10.11.44.108:8090/WSTelefonia/WSTelefonia?wsdl" uri="src/conf/xml-resources/web-service-references/WSTelefonia/wsdl/10.11.44.108_8090/WSTelefonia/WSTelefonia.wsdl"/>
+    <system systemId="http://10.11.44.108:8090/WSTelefonia/WSTelefonia?xsd=1" uri="src/conf/xml-resources/web-service-references/WSTelefonia/wsdl/10.11.44.108_8090/WSTelefonia/WSTelefonia.xsd_1.xsd"/>
+    <system systemId="http://10.11.40.182:8090/Oxxo/WS_Pago_Refrendo?wsdl" uri="src/conf/xml-resources/web-service-references/WS_Pago_Refrendo/wsdl/10.11.40.182_8090/Oxxo/WS_Pago_Refrendo.wsdl"/>
+    <system systemId="http://10.11.40.182:8090/Oxxo/WS_Pago_Refrendo?xsd=1" uri="src/conf/xml-resources/web-service-references/WS_Pago_Refrendo/wsdl/10.11.40.182_8090/Oxxo/WS_Pago_Refrendo.xsd_1.xsd"/>
+    <system systemId="http://localhost:8090/WSTelefonia/WSTelefonia?wsdl" uri="src/conf/xml-resources/web-service-references/WSTelefonia/wsdl/localhost_8090/WSTelefonia/WSTelefonia.wsdl"/>
+    <system systemId="http://localhost:8090/WSTelefonia/WSTelefonia?xsd=1" uri="src/conf/xml-resources/web-service-references/WSTelefonia/wsdl/localhost_8090/WSTelefonia/WSTelefonia.xsd_1.xsd"/>
+    <system systemId="http://localhost:8090/Oxxo/WS_Pago_Refrendo?wsdl" uri="src/conf/xml-resources/web-service-references/WS_Pago_Refrendo/wsdl/localhost_8090/Oxxo/WS_Pago_Refrendo.wsdl"/>
+    <system systemId="http://localhost:8090/Oxxo/WS_Pago_Refrendo?xsd=1" uri="src/conf/xml-resources/web-service-references/WS_Pago_Refrendo/wsdl/localhost_8090/Oxxo/WS_Pago_Refrendo.xsd_1.xsd"/>
+</catalog>
