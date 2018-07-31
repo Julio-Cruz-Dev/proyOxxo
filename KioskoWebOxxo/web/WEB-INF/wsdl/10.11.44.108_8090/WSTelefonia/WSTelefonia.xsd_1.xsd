@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2-hudson-740-. --><xs:schema xmlns:tns="http://service/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://service/">
+
+<xs:element name="GetProveedoresTelefonia" type="tns:GetProveedoresTelefonia" />
+
+<xs:element name="GetProveedoresTelefoniaResponse" type="tns:GetProveedoresTelefoniaResponse" />
+
+<xs:element name="GetTiposMovimiento" type="tns:GetTiposMovimiento" />
+
+<xs:element name="GetTiposMovimientoResponse" type="tns:GetTiposMovimientoResponse" />
+
+<xs:element name="InsertaProveedor" type="tns:InsertaProveedor" />
+
+<xs:element name="InsertaProveedorResponse" type="tns:InsertaProveedorResponse" />
+
+<xs:element name="InsertaTipoMovimiento" type="tns:InsertaTipoMovimiento" />
+
+<xs:element name="InsertaTipoMovimientoResponse" type="tns:InsertaTipoMovimientoResponse" />
+
+<xs:element name="Recarga" type="tns:Recarga" />
+
+<xs:element name="RecargaResponse" type="tns:RecargaResponse" />
+
+<xs:element name="Saldo" type="tns:Saldo" />
+
+<xs:element name="SaldoResponse" type="tns:SaldoResponse" />
+
+<xs:element name="UsoTelefono" type="tns:UsoTelefono" />
+
+<xs:element name="UsoTelefonoResponse" type="tns:UsoTelefonoResponse" />
+
+<xs:complexType name="Saldo">
+<xs:sequence>
+<xs:element name="noCel" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="SaldoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:respuestaSaldo" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="respuestaSaldo">
+<xs:sequence>
+<xs:element name="apematerno" type="xs:string" minOccurs="0" />
+<xs:element name="apepaterno" type="xs:string" minOccurs="0" />
+<xs:element name="nombre" type="xs:string" minOccurs="0" />
+<xs:element name="respuesta" type="tns:respuesta" minOccurs="0" />
+<xs:element name="saldo" type="xs:double" />
+<xs:element name="telefonia" type="xs:string" minOccurs="0" />
+<xs:element name="telefono" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="respuesta">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0" />
+<xs:element name="success" type="xs:boolean" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetProveedoresTelefonia">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="GetProveedoresTelefoniaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:respuestaGetProveedoresTelefonia" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="respuestaGetProveedoresTelefonia">
+<xs:sequence>
+<xs:element name="proveedores" type="tns:proveedoresTelefonia" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="respuesta" type="tns:respuesta" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="proveedoresTelefonia">
+<xs:sequence>
+<xs:element name="descripcion" type="xs:string" minOccurs="0" />
+<xs:element name="idTelefonia" type="xs:int" />
+<xs:element name="impuestos" type="xs:float" />
+<xs:element name="nombre" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Recarga">
+<xs:sequence>
+<xs:element name="noCel" type="xs:string" minOccurs="0" />
+<xs:element name="idTelefonia" type="xs:int" />
+<xs:element name="monto" type="xs:float" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="RecargaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:respuesta" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetTiposMovimiento">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="GetTiposMovimientoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:respuestaTiposMovimiento" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="respuestaTiposMovimiento">
+<xs:sequence>
+<xs:element name="respuesta" type="tns:respuesta" minOccurs="0" />
+<xs:element name="tiposMovimiento" type="tns:tiposMovimiento" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tiposMovimiento">
+<xs:sequence>
+<xs:element name="costo" type="xs:float" />
+<xs:element name="descripcion" type="xs:string" minOccurs="0" />
+<xs:element name="id" type="xs:int" />
+<xs:element name="tipo" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertaProveedor">
+<xs:sequence>
+<xs:element name="proveedor" type="tns:proveedoresTelefonia" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertaProveedorResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:respuesta" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertaTipoMovimiento">
+<xs:sequence>
+<xs:element name="tiposMovimiento" type="tns:tiposMovimiento" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertaTipoMovimientoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:respuesta" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="UsoTelefono">
+<xs:sequence>
+<xs:element name="idTipoMovimiento" type="xs:int" />
+<xs:element name="idTelefonia" type="xs:int" />
+<xs:element name="tiempo" type="xs:float" />
+<xs:element name="noCel" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="UsoTelefonoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:respuesta" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

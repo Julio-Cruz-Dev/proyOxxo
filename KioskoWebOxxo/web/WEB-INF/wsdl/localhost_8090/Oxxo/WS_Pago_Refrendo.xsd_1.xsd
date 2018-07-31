@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2-hudson-740-. --><xs:schema xmlns:tns="http://refrendo/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://refrendo/">
+
+<xs:element name="Pago_Refrendo" type="tns:Pago_Refrendo" />
+
+<xs:element name="Pago_RefrendoResponse" type="tns:Pago_RefrendoResponse" />
+
+<xs:element name="SaldoRefrendo" type="tns:SaldoRefrendo" />
+
+<xs:element name="SaldoRefrendoResponse" type="tns:SaldoRefrendoResponse" />
+
+<xs:complexType name="SaldoRefrendo">
+<xs:sequence>
+<xs:element name="Placas" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="SaldoRefrendoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Pago_Refrendo">
+<xs:sequence>
+<xs:element name="Placas" type="xs:string" minOccurs="0" />
+<xs:element name="pago" type="xs:double" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Pago_RefrendoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
