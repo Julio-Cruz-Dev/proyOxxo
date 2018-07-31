@@ -4,4 +4,10 @@
     <system systemId="http://10.11.44.108:8090/WSTelefonia/WSTelefonia?xsd=1" uri="src/conf/xml-resources/web-service-references/WSTelefonia/wsdl/10.11.44.108_8090/WSTelefonia/WSTelefonia.xsd_1.xsd"/>
     <system systemId="http://127.0.0.1:8090/WSTelefonia/WSTelefonia?wsdl" uri="src/conf/xml-resources/web-service-references/WSTelefonia/wsdl/127.0.0.1_8090/WSTelefonia/WSTelefonia.wsdl"/>
     <system systemId="http://127.0.0.1:8090/WSTelefonia/WSTelefonia?xsd=1" uri="src/conf/xml-resources/web-service-references/WSTelefonia/wsdl/127.0.0.1_8090/WSTelefonia/WSTelefonia.xsd_1.xsd"/>
+    <system systemId="http://127.0.0.1:8090/Oxxo/WS_Alta_Refrendo?wsdl" uri="src/conf/xml-resources/web-service-references/WS_Alta_Refrendo/wsdl/127.0.0.1_8090/Oxxo/WS_Alta_Refrendo.wsdl"/>
+    <system systemId="http://127.0.0.1:8090/Oxxo/WS_Alta_Refrendo?xsd=1" uri="src/conf/xml-resources/web-service-references/WS_Alta_Refrendo/wsdl/127.0.0.1_8090/Oxxo/WS_Alta_Refrendo.xsd_1.xsd"/>
+    <system systemId="http://127.0.0.1:8090/Oxxo/WS_Abono_Refrendo?wsdl" uri="src/conf/xml-resources/web-service-references/WS_Abono_Refrendo/wsdl/127.0.0.1_8090/Oxxo/WS_Abono_Refrendo.wsdl"/>
+    <system systemId="http://127.0.0.1:8090/Oxxo/WS_Abono_Refrendo?xsd=1" uri="src/conf/xml-resources/web-service-references/WS_Abono_Refrendo/wsdl/127.0.0.1_8090/Oxxo/WS_Abono_Refrendo.xsd_1.xsd"/>
+    <system systemId="http://127.0.0.1:8090/Oxxo/WS_Pago_Refrendo?wsdl" uri="src/conf/xml-resources/web-service-references/WS_Pago_Refrendo/wsdl/127.0.0.1_8090/Oxxo/WS_Pago_Refrendo.wsdl"/>
+    <system systemId="http://127.0.0.1:8090/Oxxo/WS_Pago_Refrendo?xsd=1" uri="src/conf/xml-resources/web-service-references/WS_Pago_Refrendo/wsdl/127.0.0.1_8090/Oxxo/WS_Pago_Refrendo.xsd_1.xsd"/>
 </catalog>

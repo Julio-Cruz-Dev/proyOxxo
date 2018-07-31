@@ -35,11 +35,13 @@
       <a href="Inicio.jsp" TARGET=principal class="active">INICIO</a>
       <a href="ctlProveedores.jsp" TARGET=principal>PROVEEDORE TELEFONIA</a>
       <a href="tipoMovimiento.jsp" TARGET=principal>TIPO MOVIMIENTO</a>
-      <a href="ctlPersona.jsp" TARGET=principal>PERSONA</a>
-      <a href="recarga.jsp" TARGET=principal>RECARGA</a>
+      <a href="ctlPersona.jsp" TARGET=principal>PERSONA TELEFONIA</a>
+      <a href="recarga.jsp" TARGET=principal>RECARGA</a>      
+      <a href="rfAltaRefrendo.jsp" TARGET=principal>ALTA REFRENDO</a>
+      <a href="rfAbonoReferendo.jsp" TARGET=principal>ABONO REFRENDO</a>
+      <a href="rfPagoRefrendo.jsp" TARGET=principal>PAGO REFRENDO</a>
       <a href="#">....</a>
-      <a href="#">....</a>
-      
+      <a href="#">....</a>      
     </div>
 </body>
 </html>

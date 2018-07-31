@@ -42,5 +42,53 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/service"/>
         <delete dir="${build.generated.dir}/jax-wsCache/WSTelefonia"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-WSTelefonia"/>
+    <target name="wsimport-client-WS_Alta_Refrendo" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/WS_Alta_Refrendo"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/WS_Alta_Refrendo" destdir="${build.generated.dir}/jax-wsCache/WS_Alta_Refrendo" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/WS_Alta_Refrendo/wsdl/127.0.0.1_8090/Oxxo/WS_Alta_Refrendo.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8090/Oxxo/WS_Alta_Refrendo?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/WS_Alta_Refrendo/wsdl/127.0.0.1_8090/Oxxo/WS_Alta_Refrendo.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/WS_Alta_Refrendo"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/WS_Alta_Refrendo">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-WS_Alta_Refrendo" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/refrendo"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/WS_Alta_Refrendo"/>
+    </target>
+    <target name="wsimport-client-WS_Abono_Refrendo" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/WS_Abono_Refrendo"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/WS_Abono_Refrendo" destdir="${build.generated.dir}/jax-wsCache/WS_Abono_Refrendo" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/WS_Abono_Refrendo/wsdl/127.0.0.1_8090/Oxxo/WS_Abono_Refrendo.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8090/Oxxo/WS_Abono_Refrendo?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/WS_Abono_Refrendo/wsdl/127.0.0.1_8090/Oxxo/WS_Abono_Refrendo.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/WS_Abono_Refrendo"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/WS_Abono_Refrendo">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-WS_Abono_Refrendo" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/refrendo"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/WS_Abono_Refrendo"/>
+    </target>
+    <target name="wsimport-client-WS_Pago_Refrendo" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/WS_Pago_Refrendo"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/WS_Pago_Refrendo" destdir="${build.generated.dir}/jax-wsCache/WS_Pago_Refrendo" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/WS_Pago_Refrendo/wsdl/127.0.0.1_8090/Oxxo/WS_Pago_Refrendo.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8090/Oxxo/WS_Pago_Refrendo?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/WS_Pago_Refrendo/wsdl/127.0.0.1_8090/Oxxo/WS_Pago_Refrendo.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/WS_Pago_Refrendo"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/WS_Pago_Refrendo">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-WS_Pago_Refrendo" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/refrendo"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/WS_Pago_Refrendo"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-WSTelefonia, wsimport-client-WS_Alta_Refrendo, wsimport-client-WS_Abono_Refrendo, wsimport-client-WS_Pago_Refrendo"/>
 </project>
