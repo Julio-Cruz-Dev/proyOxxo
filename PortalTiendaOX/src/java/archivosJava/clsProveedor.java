@@ -28,7 +28,7 @@ public class clsProveedor {
 ////               rs = stm.executeQuery("select id,Nombre from clt_proveedor_telefonia");
                RespuestaGetProveedoresTelefonia result= getProveedoresTelefonia(); 
                 List datos =  result.getProveedores();
-                String arreglo[][] = new String[40][40];
+                String arreglo[][] = new String[2][datos.size()];
                 ProveedoresTelefonia prov = new ProveedoresTelefonia();
                  for (int i= 0;i<datos.size();i++) 
                  {  

@@ -3,6 +3,7 @@
     Created on : 28/07/2018, 12:44:27 PM
     Author     : julio
 --%>
+<%@page import="java.util.Arrays"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -108,9 +109,11 @@
                  <select name="opciones" id="opciones" onchange="ShowSelected();" >
                  <option value="0">SELECCIONE</option>
                   <%
-                                String datos[][] = new String[40][40];
-                                datos= objpv.Listar();                                
-                                 for (int i= 0;i<datos.length;i++) {  
+                                String datos[][] = new String[2][(objpv.Listar().length)];
+                                datos= objpv.Listar();
+                                                                
+                                
+                                 for (int i= 0;i<datos[1].length;i++) {  
                                   
                     %>
                    <option value="<%=datos[0][i]%>"><%=datos[1][i]%></option>                                                                                
